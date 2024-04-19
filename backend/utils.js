@@ -1,4 +1,5 @@
 import parser from "rss-to-json-text";
+import jwt from "jsonwebtoken";
 
 export const parseNews = async (url) => {
   const data = await parser.parse(url);
@@ -15,4 +16,17 @@ export const parseNews = async (url) => {
     dataJSON.push(temp);
   });
   return dataJSON;
+};
+
+export const generateLogToken = (user) => {
+  return jwt.sign(
+    {
+      _id: user._id,
+      email: user.email,
+    },
+    process.env.JWT_SECRET,
+    {
+      expiresIn: "1h",
+    }
+  );
 };
