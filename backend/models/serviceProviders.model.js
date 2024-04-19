@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 
 const serviceProviderSchema = mongoose.Schema({
-    name: {
+    id: {
         type: String,
-        required: [true, "Please provide a name"],
+        required: [true, "Please provide a ID"],
     },
     TimesOfIndia: {
         type: Boolean,
@@ -13,18 +13,10 @@ const serviceProviderSchema = mongoose.Schema({
         type: Boolean,
         required: false,
     },
-    TheHindu:{
-        type: Boolean,
-        required: false,
-    },
     NDTV:{
         type: Boolean,
         required: false,
     },
-    IndiaToday:{
-        type: Boolean,
-        required: false,
-    }
 })
 
 const serviceProvider = mongoose.model("serviceProvider", serviceProviderSchema);

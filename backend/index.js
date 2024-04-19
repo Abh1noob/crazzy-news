@@ -1,6 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import { verifyToken } from "./utils.js";
 
 import news from "./routes/news.routes.js";
 import user from "./routes/user.routes.js";
@@ -24,6 +25,10 @@ const connectDB = async () => {
 connectDB();
 app.use("/api/news", news);
 app.use("/api/auth", user);
+
+app.get("/protected", verifyToken, (req, res) => {
+  res.json({ message: "This is a protected route", user: req.user });
+});
 
 app.get("/ping", (req, res) => {
   res.send("pong");
