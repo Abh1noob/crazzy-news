@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start":"nodemon index.js",
+    "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -16,6 +16,7 @@
     "express": "^4.19.2",
     "mongodb": "^6.5.0",
     "mongoose": "^8.3.2",
-    "nodemon": "^3.1.0"
+    "nodemon": "^3.1.0",
+    "rss-to-json-text": "^2.1.2"
   }
 }
