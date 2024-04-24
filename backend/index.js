@@ -1,10 +1,11 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import { verifyToken } from "./utils.js";
+import verifyToken from "./api/utils/auth/verifyToken.js"
+import connectDB from "./api/utils/connectDB.js";
 
-import news from "./routes/news.routes.js";
-import user from "./routes/user.routes.js";
+import news from "./api/routes/news.routes.js"
+import user from "./api/routes/user.routes.js"
 
 dotenv.config();
 
@@ -12,17 +13,8 @@ const app = express();
 
 app.use(express.json());
 
-const connectDB = async () => {
-  const uri = process.env.MONGO_URI;
-  try {
-    const response = await mongoose.connect(uri);
-    console.log("Connected to MongoDB");
-  } catch (error) {
-    console.log("Error connecting to MongoDB: " + error.message);
-  }
-};
+await connectDB();
 
-connectDB();
 app.use("/api/news", news);
 app.use("/api/auth", user);
 

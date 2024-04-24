@@ -1,7 +1,7 @@
 import express from "express";
 import user from "../models/user.model.js";
 import bcrypt from "bcryptjs";
-import { generateLogToken } from "../utils.js";
+import createToken from "../utils/auth/createToken.js"
 
 export const createUser = async (req, res) => {
   try {
@@ -25,13 +25,13 @@ export const createUser = async (req, res) => {
 export const loginUser = async (req, res) => {
   const userData = await user.findOne({ email: req.body.email });
   if (userData) {
-    const valid = await bcrypt.compare(req.body.password, userData.password);
+    const valid = bcrypt.compare(req.body.password, userData.password);
     if (valid) {
       res.status(200).json({
         message: "User logged in successfully",
         data: {
           _id: userData._id,
-          access_token: generateLogToken(userData),
+          access_token: createToken(userData),
         },
       });
     } else {
